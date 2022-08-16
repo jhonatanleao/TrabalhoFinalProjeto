@@ -67,6 +67,20 @@ public class TelaPrincipalPresenter {
             }
         });  
         
+        this.view.getBtnExcluir().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                excluir(pessoa);
+            }
+        }); 
+        
+        this.view.getBtnSair().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                view.dispose();
+            }
+        }); 
+        
         view.setLocationRelativeTo(null);
         view.setVisible(true);
     }
@@ -107,5 +121,36 @@ public class TelaPrincipalPresenter {
     
     public void permissao(){
         new TelaPermissoesPresenter();
+    }
+    
+    public void excluir(Pessoa pessoa){
+        JFileChooser fileChooser = view.getFileChooser();
+        File file = new File("src/imagens");
+        fileChooser.setCurrentDirectory(file);
+        fileChooser.setDialogTitle("Procurar Imagem");
+        fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("imagem", "jpg", "png");
+        fileChooser.setFileFilter(filter);
+        int retorno = fileChooser.showOpenDialog(view);
+        
+        boolean flag= false;
+        
+        if(retorno == JFileChooser.APPROVE_OPTION){
+            file = fileChooser.getSelectedFile();
+            List<ImagemProxy> listImagem = new ArrayList();
+            ImagemDao imgDao = new ImagemDao();
+            listImagem = imgDao.read();
+            for(ImagemProxy imagem : listImagem){
+                flag = imagem.excluir(pessoa.getPermissoes(), file.getName());
+            }
+            
+            if(flag == true){
+                file.delete();
+                JOptionPane.showMessageDialog(view, "Foto excluida com sucesso", "", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(view, "Você não tem permissão para excluir essa imagem", "Erro", JOptionPane.ERROR_MESSAGE);
+            }  
+            
+        }      
     }
 }

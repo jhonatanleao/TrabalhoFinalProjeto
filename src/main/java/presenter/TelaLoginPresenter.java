@@ -44,7 +44,7 @@ public class TelaLoginPresenter {
             AdmFactory admFactory = new AdmFactory();
             pessoa = admFactory.criar(pessoa.getNome(), pessoa.getSenha());
             pDao.create(pessoa);
-            //criar um option pane para falar que foi criado o perfil como adm
+            JOptionPane.showMessageDialog(view, "Usuario adicionado como administrador", "", JOptionPane.INFORMATION_MESSAGE);
             new TelaPrincipalPresenter(pessoa);
         }else {
             AutenticadorService autenticador = new AutenticadorService();
