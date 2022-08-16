@@ -26,6 +26,7 @@ import com.pss.imagem.processamento.decorator.VermelhoDecorator;
 import com.pss.imagem.processamento.decorator.Imagem;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.io.FileInputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
@@ -42,17 +43,23 @@ public class TelaImagemPresenter {
         view = new TelaImagemView();
         imagem = new Imagem(file.getPath());
         imagem = new NegativaDecorator(imagem);
+        
+        
+        
+        
         var caminhoPNG = file.getPath().replace(".jpg", ".png");
-        var imagePNG = new File(caminhoPNG);
+        FileInputStream inputStream = new FileInputStream(caminhoPNG);
         ImageIO.write(imagem.getImagem(), "png", imagePNG);
         
-        BufferedImage image = ImageIO.read(imagePNG);
-        BufferedImage result = new BufferedImage(
-            image.getWidth(),
-            image.getHeight(),
-            BufferedImage.TYPE_INT_RGB);
-
-        result.createGraphics().drawImage(image, 0, 0, Color.white, null);
+//        ImageIO.write(imagem.getImagem(), "png", imagePNG);
+//        
+//        BufferedImage image = ImageIO.read(imagePNG);
+//        BufferedImage result = new BufferedImage(
+//            image.getWidth(),
+//            image.getHeight(),
+//            BufferedImage.TYPE_INT_RGB);
+//
+//        result.createGraphics().drawImage(image, 0, 0, Color.white, null);
         
         ImageIO.write(result, "jpg", file.getCanonicalFile());
 
