@@ -2,7 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package usuario;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -14,15 +17,19 @@ public class Pessoa {
     private String senha;
     private int adm;
     private int qtdNotificacao;
+    private Set<String> notificacao;
+    private Set<String> permissoes;
 
-    public Pessoa(String nome, String senha, int adm) {
+    public Pessoa(String nome, String senha) {
         this.id = 0;
         this.nome = nome;
         this.senha = senha;
-        this.adm = adm;
+        this.adm = 0;
         this.qtdNotificacao = 0;
-    }
-
+        notificacao = new HashSet<String>();
+        permissoes = new HashSet<String>();
+    }   
+    
     public Pessoa() {
     }
 
@@ -64,6 +71,30 @@ public class Pessoa {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getQtdNotificacao() {
+        return qtdNotificacao;
+    }
+
+    public Set<String> getNotificacao() {
+        return notificacao;
+    }
+
+    public Set<String> getPermissoes() {
+        return permissoes;
+    }
+
+    public void setQtdNotificacao(int qtdNotificacao) {
+        this.qtdNotificacao = qtdNotificacao;
+    }
+
+    public void setNotificacao(Set<String> notificacao) {
+        this.notificacao = notificacao;
+    }
+
+    public void setPermissoes(Set<String> permissoes) {
+        this.permissoes = permissoes;
     }
     
     

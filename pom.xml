@@ -23,6 +23,9 @@
             <resource>
                 <directory>src/data</directory>
             </resource>
+            <resource>
+                <directory>src/imagens</directory>
+            </resource>
         </resources>
     </build>
 </project>

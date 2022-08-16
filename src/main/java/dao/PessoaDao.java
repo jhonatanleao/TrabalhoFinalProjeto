@@ -12,28 +12,57 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import model.Pessoa;
+import usuario.Pessoa;
 
 /**
  *
  * @author jhonatan
  */
 public class PessoaDao {
+    
+    public int eVazio(){
+        Connection con = SqliteConnection.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int contador=0;
+
+        try{           
+            stmt = con.prepareStatement("SELECT COUNT(id) FROM pessoa");
+            rs = stmt.executeQuery();
+            contador = rs.getInt("COUNT(id)");
+            
+        } catch (SQLException ex){
+            System.out.println(ex);
+        } finally {
+            SqliteConnection.closeConnection(con, stmt);
+        }
+        return contador;
+    }
 
     public void create(Pessoa pessoa){
         Connection con = SqliteConnection.getConnection();
         PreparedStatement stmt = null;
+        ResultSet rs = null;
 
         try{
-            stmt = con.prepareStatement("INSERT INTO pessoa (nome, senha, admin, qtdNotificacao) "
-                    + "VALUES (?, ?, ?, ?)");
-            stmt.setString(1, pessoa.getNome());
-            stmt.setString(2, pessoa.getSenha());
-            stmt.setInt(3, pessoa.getAdm());
-            stmt.setInt(4, pessoa.getQtdNotificação());
             
-            stmt.executeUpdate();
+            if(this.verificaNome(pessoa.getNome()) == 0){
+                int verificador = this.eVazio();
+                if(verificador == 0){
+                    pessoa.setAdm(1);
+                } 
+                stmt = con.prepareStatement("INSERT INTO pessoa (nome, senha, admin, qtdNotificacao) "
+                        + "VALUES (?, ?, ?, ?)");
+                stmt.setString(1, pessoa.getNome());
+                stmt.setString(2, pessoa.getSenha());
+                stmt.setInt(3, pessoa.getAdm());
+                stmt.setInt(4, pessoa.getQtdNotificação());
 
+                stmt.executeUpdate();
+            } else {
+                System.out.println("entrou aqui");
+                //criar um option pane para falar que ja existe uma pessoa com aquele nome
+            }
             
         } catch (SQLException ex){
             System.out.println(ex);
@@ -41,6 +70,8 @@ public class PessoaDao {
             SqliteConnection.closeConnection(con, stmt);
         }
     }
+    
+    
     
     public List<Pessoa> read() {
         Connection con = SqliteConnection.getConnection();
@@ -52,7 +83,7 @@ public class PessoaDao {
         try {
             stmt = con.prepareStatement("SELECT * FROM pessoa");
             rs = stmt.executeQuery();
-
+            System.out.println(rs);
             while(rs.next()){
                 Pessoa pessoa = new Pessoa();
 
@@ -74,6 +105,55 @@ public class PessoaDao {
         }
         return listPessoa;
     }    
+ 
+    public int verificaNome(String nome) {
+        Connection con = SqliteConnection.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        int contador=0;
+
+        try {           
+            stmt = con.prepareStatement("SELECT * FROM pessoa WHERE nome = ?");
+            stmt.setString(1, nome);
+            rs = stmt.executeQuery();
+            contador = rs.getInt("id");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            SqliteConnection.closeConnection(con, stmt, rs);
+        }
+        return contador;
+    } 
+    
+    public Pessoa readByName(String nome) {
+        Connection con = SqliteConnection.getConnection();
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+        Pessoa pessoa = new Pessoa();
+
+        try {
+            
+            stmt = con.prepareStatement("SELECT * FROM pessoa WHERE nome = ?");
+            stmt.setString(1, nome);
+            rs = stmt.executeQuery();
+            System.out.println(rs);
+            while(rs.next()){
+                pessoa.setId(rs.getInt("id"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setSenha(rs.getString("senha"));
+                pessoa.setAdm(rs.getInt("admin"));
+                pessoa.setQtdNotificação(rs.getInt("qtdNotificacao"));
+
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        } finally {
+            SqliteConnection.closeConnection(con, stmt, rs);
+        }
+        return pessoa;
+    } 
 
     
     public void update(Pessoa pessoa){
