@@ -4,6 +4,7 @@
  */
 package dao;
 
+import Util.ProcessaString;
 import conexaoBanco.SqliteConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
-import usuario.Pessoa;
+import pessoa.Pessoa;
 
 /**
  *
@@ -39,7 +40,7 @@ public class PessoaDao {
         return contador;
     }
 
-    public void create(Pessoa pessoa){
+    public int create(Pessoa pessoa){
         Connection con = SqliteConnection.getConnection();
         PreparedStatement stmt = null;
         ResultSet rs = null;
@@ -51,16 +52,20 @@ public class PessoaDao {
                 if(verificador == 0){
                     pessoa.setAdm(1);
                 } 
-                stmt = con.prepareStatement("INSERT INTO pessoa (nome, senha, admin, qtdNotificacao) "
-                        + "VALUES (?, ?, ?, ?)");
+                stmt = con.prepareStatement("INSERT INTO pessoa (nome, senha, admin, qtdNotificacao, notificacoes, permissoes) "
+                        + "VALUES (?, ?, ?, ?, ?, ?)");
                 stmt.setString(1, pessoa.getNome());
                 stmt.setString(2, pessoa.getSenha());
                 stmt.setInt(3, pessoa.getAdm());
                 stmt.setInt(4, pessoa.getQtdNotificação());
+                
+                ProcessaString prossamento = new ProcessaString();               
+                stmt.setString(5, prossamento.compila(pessoa.getNotificacao()));
+                stmt.setString(6, prossamento.compila(pessoa.getPermissoes()));
 
                 stmt.executeUpdate();
             } else {
-                System.out.println("entrou aqui");
+                return 0;
                 //criar um option pane para falar que ja existe uma pessoa com aquele nome
             }
             
@@ -69,6 +74,7 @@ public class PessoaDao {
         } finally {
             SqliteConnection.closeConnection(con, stmt);
         }
+        return 1;
     }
     
     
@@ -92,7 +98,9 @@ public class PessoaDao {
                 pessoa.setSenha(rs.getString("senha"));
                 pessoa.setAdm(rs.getInt("admin"));
                 pessoa.setQtdNotificação(rs.getInt("qtdNotificacao"));
- 
+                ProcessaString prossamento = new ProcessaString();
+                pessoa.setNotificacao(prossamento.descompila(rs.getString("notificacoes")));
+                pessoa.setPermissoes(prossamento.descompila(rs.getString("permissoes"))); 
                 //criar o collection de pessoa
                 listPessoa.add(pessoa);
 
@@ -137,15 +145,17 @@ public class PessoaDao {
             stmt = con.prepareStatement("SELECT * FROM pessoa WHERE nome = ?");
             stmt.setString(1, nome);
             rs = stmt.executeQuery();
-            System.out.println(rs);
-            while(rs.next()){
-                pessoa.setId(rs.getInt("id"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setSenha(rs.getString("senha"));
-                pessoa.setAdm(rs.getInt("admin"));
-                pessoa.setQtdNotificação(rs.getInt("qtdNotificacao"));
+            System.out.println(rs.getString("nome"));
+            
+            pessoa.setId(rs.getInt("id"));
+            pessoa.setNome(rs.getString("nome"));
+            pessoa.setSenha(rs.getString("senha"));
+            pessoa.setAdm(rs.getInt("admin"));
+            pessoa.setQtdNotificação(rs.getInt("qtdNotificacao"));
+            ProcessaString prossamento = new ProcessaString();
+            pessoa.setNotificacao(prossamento.descompila(rs.getString("notificacoes")));
+            pessoa.setPermissoes(prossamento.descompila(rs.getString("permissoes")));
 
-            }
             
         } catch (SQLException ex) {
             System.out.println(ex);

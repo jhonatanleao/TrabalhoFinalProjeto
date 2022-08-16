@@ -6,13 +6,14 @@
 package pss.trabalhofinal;
 
 import Util.ProcessaString;
+import dao.ImagemDao;
 import dao.PessoaDao;
+import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
-import model.Notificacao;
 import presenter.TelaLoginPresenter;
 import presenter.TelaImagemPresenter;
-import usuario.Pessoa;
+import pessoa.Pessoa;
 
 /**
  *
@@ -25,12 +26,20 @@ public class TrabalhoFinal {
         //PessoaDao pDao = new PessoaDao();
         //pDao.create(pessao);
         
-        //Notificacao not = new Notificacao(1, "testando");
         //PessoaDao nDao = new PessoaDao();
         //nDao.read();
         //new TelaImagemPresenter();
         new TelaLoginPresenter();
         
+//        ImagemDao imgDao = new ImagemDao();
+//        File file = new File("src/imagens");
+//	File afile[] = file.listFiles();
+//	int i = 0;
+//	for (int j = afile.length; i < j; i++) {
+//		File arquivos = afile[i];
+//                imgDao.create(arquivos.getName());
+//		System.out.println(arquivos.getName());
+//	}
 //        teste dos set ir pro banco e voltar
 //        Set<String> listString = new HashSet<String>();
 //        Pessoa pessoa = new Pessoa("jose", "123");

@@ -4,11 +4,13 @@
  */
 package presenter;
 
+import Factory.AdmFactory;
+import dao.PessoaDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import usuario.AutenticadorService;
-import usuario.Pessoa;
+import pessoa.AutenticadorService;
+import pessoa.Pessoa;
 import view.TelaLoginView;
 
 
@@ -22,7 +24,7 @@ public class TelaLoginPresenter {
     public TelaLoginPresenter(){
         view = new TelaLoginView();
         
-        this.view.getBtnEntrar().addActionListener(new ActionListener(){
+    this.view.getBtnEntrar().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
                 entrar();
@@ -36,14 +38,26 @@ public class TelaLoginPresenter {
         String usuario = this.view.getTxtUsuario().getText();
         String senha = this.view.getTxtSenha().getText();
         Pessoa pessoa = new Pessoa(usuario, senha);
+        PessoaDao pDao = new PessoaDao();
         
-        AutenticadorService autenticador = new AutenticadorService();
-        boolean resultado = autenticador.processa(pessoa);
-        if(resultado == true){
-            new TelaPrincipalPresenter();
-        } else {
-            JOptionPane.showMessageDialog(view, "Usuario ou senha incorreto", "Erro", JOptionPane.ERROR_MESSAGE);
+        if(pDao.eVazio() == 0){
+            AdmFactory admFactory = new AdmFactory();
+            pessoa = admFactory.criar(pessoa.getNome(), pessoa.getSenha());
+            pDao.create(pessoa);
+            //criar um option pane para falar que foi criado o perfil como adm
+            new TelaPrincipalPresenter(pessoa);
+        }else {
+            AutenticadorService autenticador = new AutenticadorService();
+            boolean resultado = autenticador.processa(pessoa);
+            if(resultado == true){
+                pessoa = pDao.readByName(pessoa.getNome());
+                new TelaPrincipalPresenter(pessoa);
+            } else {
+                JOptionPane.showMessageDialog(view, "Usuario ou senha incorreto", "Erro", JOptionPane.ERROR_MESSAGE);
+            }            
         }
+        
+
         
     }
 }

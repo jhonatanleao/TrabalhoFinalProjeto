@@ -36,7 +36,7 @@ public class TelaPrincipalView extends javax.swing.JFrame {
         lblPerfil = new javax.swing.JLabel();
         btnNotificacao = new javax.swing.JButton();
         lblUsuario = new javax.swing.JLabel();
-        btnListar = new javax.swing.JButton();
+        btnPermissoes = new javax.swing.JButton();
         btnAdc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -52,7 +52,7 @@ public class TelaPrincipalView extends javax.swing.JFrame {
 
         btnNotificacao.setText("Notificacao: 0");
 
-        btnListar.setText("Listar Usuarios");
+        btnPermissoes.setText("Dar Permissões");
 
         btnAdc.setText("Adicionar Usuarios");
 
@@ -77,7 +77,7 @@ public class TelaPrincipalView extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnListar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
+                    .addComponent(btnPermissoes, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                     .addComponent(btnNotificacao, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
@@ -88,7 +88,7 @@ public class TelaPrincipalView extends javax.swing.JFrame {
                     .addComponent(btnExcluir))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 225, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnListar)
+                    .addComponent(btnPermissoes)
                     .addComponent(btnAdc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -152,7 +152,7 @@ public class TelaPrincipalView extends javax.swing.JFrame {
     }
 
     public JButton getBtnListar() {
-        return btnListar;
+        return btnPermissoes;
     }
 
     public JButton getBtnNotificacao() {
@@ -177,8 +177,8 @@ public class TelaPrincipalView extends javax.swing.JFrame {
     private javax.swing.JButton btnAbrir;
     private javax.swing.JButton btnAdc;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnListar;
     private javax.swing.JButton btnNotificacao;
+    private javax.swing.JButton btnPermissoes;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel lblPerfil;
     private javax.swing.JLabel lblUsuario;
