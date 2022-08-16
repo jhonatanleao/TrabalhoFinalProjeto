@@ -174,14 +174,16 @@ public class PessoaDao {
             //pegar o id do caboco
             //int id = getIdByName(funcionario.getNome());
             
-            stmt = con.prepareStatement("UPDATE pessoa SET nome = ?, senha = ?, adm = ?, qtdNotificacao = ? WHERE id = ?");
+            stmt = con.prepareStatement("UPDATE pessoa SET nome = ?, senha = ?, admin = ?, qtdNotificacao = ?, notificacoes = ?, permissoes = ? WHERE id = ?");
             stmt.setString(1, pessoa.getNome());
             stmt.setString(2, pessoa.getSenha());
             stmt.setInt(3, pessoa.getAdm());
             stmt.setInt(4, pessoa.getQtdNotificação());
-            stmt.setInt(5, pessoa.getId());
+            stmt.setInt(7, pessoa.getId());
 
-
+            ProcessaString prossamento = new ProcessaString();               
+            stmt.setString(5, prossamento.compila(pessoa.getNotificacao()));
+            stmt.setString(6, prossamento.compila(pessoa.getPermissoes()));
             stmt.executeUpdate();
 
         } catch (SQLException ex){

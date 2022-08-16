@@ -36,10 +36,8 @@
                       <EmptySpace pref="44" max="32767" attributes="0"/>
                       <Component id="btnSalvar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="txtNome" max="32767" attributes="0"/>
-                      <Component id="CbxLista" pref="188" max="32767" attributes="0"/>
-                  </Group>
+                  <Component id="txtNome" alignment="0" max="32767" attributes="0"/>
+                  <Component id="CbxLista" alignment="0" pref="188" max="32767" attributes="0"/>
               </Group>
               <EmptySpace pref="106" max="32767" attributes="0"/>
           </Group>

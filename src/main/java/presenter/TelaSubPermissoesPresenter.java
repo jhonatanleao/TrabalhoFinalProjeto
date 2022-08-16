@@ -5,8 +5,14 @@
 package presenter;
 
 import dao.ImagemDao;
+import dao.PessoaDao;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 import javax.swing.JComboBox;
+import pessoa.Pessoa;
 import proxy.ImagemProxy;
 import view.TelaSubPermissoesView;
 
@@ -17,12 +23,30 @@ import view.TelaSubPermissoesView;
 public class TelaSubPermissoesPresenter {
     TelaSubPermissoesView view;
     
-    public TelaSubPermissoesPresenter(){
+    public TelaSubPermissoesPresenter(Pessoa pessoa){
         view = new TelaSubPermissoesView();
         preencheCombo();
         
-        //getSelectedItem();
-        //add no set da pessoa que eu selecionei antes
+        view.getTxtNome().setText(pessoa.getNome());
+        view.getTxtNome().setEditable(false);
+            //getSelectedItem();
+            //add no set da pessoa que eu selecionei antes
+            
+        this.view.getBtnSalvar().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                salvar(pessoa);
+            }
+        });
+        
+        this.view.getBtnFechar().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                fechar();
+            }
+        });
+            //falta da um update no banco com base nessa pessoa aqui
+
         
         
         
@@ -43,5 +67,23 @@ public class TelaSubPermissoesPresenter {
                 combo.addItem(arquivos.getName());		
 	}
         
+    }
+    
+    public void salvar(Pessoa pessoa){
+        String selecionado = view.getCbxLista().getSelectedItem().toString();
+        if(selecionado.equals("Toda a pasta"))
+              selecionado = "tudo";
+        System.out.println(selecionado);
+        Set<String> permissoes = new HashSet<String>();
+        permissoes = pessoa.getPermissoes();
+        permissoes.add(selecionado);
+        pessoa.setPermissoes(permissoes);
+        PessoaDao pDao = new PessoaDao();
+        pDao.update(pessoa);
+    }
+    
+    public void fechar(){
+        view.dispose();
+        new TelaPermissoesPresenter();
     }
 }

@@ -28,7 +28,17 @@ public class TelaPermissoesPresenter {
         this.view.getBtnPermissao().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                permissao();
+                if(view.getTblTabela().getSelectedRow() != -1){
+                    String nome = view.getTblTabela().getValueAt(view.getTblTabela().getSelectedRow(), 0).toString();                   
+                    permissao(nome);
+                }
+            }
+        });
+        
+        this.view.getBtnFechar().addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e){
+                fechar();
             }
         });
         
@@ -53,8 +63,10 @@ public class TelaPermissoesPresenter {
         
     }
     
-    public void permissao(){
-        new TelaSubPermissoesPresenter();
+    public void permissao(String nome){
+        PessoaDao pDao = new PessoaDao();
+        new TelaSubPermissoesPresenter(pDao.readByName(nome));
+        view.dispose();
     }
     
     public void excluir(){
@@ -62,6 +74,6 @@ public class TelaPermissoesPresenter {
     }
     
     public void fechar(){
-        
+        view.dispose();
     }
 }

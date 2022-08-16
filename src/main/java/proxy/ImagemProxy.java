@@ -35,4 +35,11 @@ public class ImagemProxy implements ImagemInterface{
         return gerenciador.autoriza(autorizacoes, caminhoImagem);
     }
     
+    public String getCaminho(Set<String> autorizacoes, String caminhoImagem) {
+        if(gerenciador.autoriza(autorizacoes, caminhoImagem)){
+            return imagem.getCaminho();
+        }
+        return null;
+    }
+    
 }

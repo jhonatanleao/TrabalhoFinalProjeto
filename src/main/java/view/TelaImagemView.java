@@ -5,6 +5,7 @@
 package view;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,6 +38,16 @@ public class TelaImagemView extends javax.swing.JFrame {
         btnDesfazer = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         lblImagem = new javax.swing.JLabel();
+        chkAzul = new javax.swing.JCheckBox();
+        chkVerde = new javax.swing.JCheckBox();
+        chkVermelho = new javax.swing.JCheckBox();
+        chkEspelhada = new javax.swing.JCheckBox();
+        chkNegativa = new javax.swing.JCheckBox();
+        chkSépia = new javax.swing.JCheckBox();
+        chkPixelar = new javax.swing.JCheckBox();
+        chkCinza = new javax.swing.JCheckBox();
+        chkBrilho = new javax.swing.JCheckBox();
+        chkRotacionar = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -50,14 +61,34 @@ public class TelaImagemView extends javax.swing.JFrame {
 
         lblImagem.setMaximumSize(new java.awt.Dimension(535, 445));
 
+        chkAzul.setText("Imagem Azul");
+
+        chkVerde.setText("Imagem Verde");
+
+        chkVermelho.setText("Imagem Vermelha");
+
+        chkEspelhada.setText("Imagem Espelhada");
+
+        chkNegativa.setText("Imagem Negativa");
+
+        chkSépia.setText("Aplicar Cor Sépia");
+
+        chkPixelar.setText("Pixelar Imagem");
+
+        chkCinza.setText("Tons de cinza");
+
+        chkBrilho.setText("Aplicar Brilho");
+
+        chkRotacionar.setText("Rotacionar Imagem");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(254, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(391, Short.MAX_VALUE)
                         .addComponent(btnSalvar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnDesfazer)
@@ -65,14 +96,51 @@ public class TelaImagemView extends javax.swing.JFrame {
                         .addComponent(btnRestaurar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnFechar))
-                    .addComponent(lblImagem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(chkAzul)
+                            .addComponent(chkVerde)
+                            .addComponent(chkVermelho)
+                            .addComponent(chkEspelhada)
+                            .addComponent(chkNegativa)
+                            .addComponent(chkSépia)
+                            .addComponent(chkPixelar)
+                            .addComponent(chkCinza)
+                            .addComponent(chkBrilho)
+                            .addComponent(chkRotacionar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 535, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblImagem, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(chkAzul)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkVerde)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkVermelho)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkEspelhada)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkNegativa)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkSépia)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkPixelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkCinza)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkBrilho)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(chkRotacionar)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnFechar)
@@ -147,6 +215,46 @@ public class TelaImagemView extends javax.swing.JFrame {
         return lblImagem;
     }
 
+    public JCheckBox getChkAzul() {
+        return chkAzul;
+    }
+
+    public JCheckBox getChkBrilho() {
+        return chkBrilho;
+    }
+
+    public JCheckBox getChkCinza() {
+        return chkCinza;
+    }
+
+    public JCheckBox getChkEspelhada() {
+        return chkEspelhada;
+    }
+
+    public JCheckBox getChkNegativa() {
+        return chkNegativa;
+    }
+
+    public JCheckBox getChkPixelar() {
+        return chkPixelar;
+    }
+
+    public JCheckBox getChkRotacionar() {
+        return chkRotacionar;
+    }
+
+    public JCheckBox getChkSépia() {
+        return chkSépia;
+    }
+
+    public JCheckBox getChkVerde() {
+        return chkVerde;
+    }
+
+    public JCheckBox getChkVermelho() {
+        return chkVermelho;
+    }
+
 
 
     
@@ -156,6 +264,16 @@ public class TelaImagemView extends javax.swing.JFrame {
     private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnRestaurar;
     private javax.swing.JButton btnSalvar;
+    private javax.swing.JCheckBox chkAzul;
+    private javax.swing.JCheckBox chkBrilho;
+    private javax.swing.JCheckBox chkCinza;
+    private javax.swing.JCheckBox chkEspelhada;
+    private javax.swing.JCheckBox chkNegativa;
+    private javax.swing.JCheckBox chkPixelar;
+    private javax.swing.JCheckBox chkRotacionar;
+    private javax.swing.JCheckBox chkSépia;
+    private javax.swing.JCheckBox chkVerde;
+    private javax.swing.JCheckBox chkVermelho;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JLabel lblImagem;
     // End of variables declaration//GEN-END:variables

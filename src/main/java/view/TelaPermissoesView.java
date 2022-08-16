@@ -33,6 +33,7 @@ public class TelaPermissoesView extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblTabela = new javax.swing.JTable();
+        btnFechar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,7 +50,7 @@ public class TelaPermissoesView extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -58,12 +59,16 @@ public class TelaPermissoesView extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblTabela);
 
+        btnFechar.setText("Fechar");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnFechar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnExcluir)
                 .addGap(18, 18, 18)
                 .addComponent(btnPermissao)
@@ -77,7 +82,8 @@ public class TelaPermissoesView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPermissao)
-                    .addComponent(btnExcluir))
+                    .addComponent(btnExcluir)
+                    .addComponent(btnFechar))
                 .addContainerGap())
         );
 
@@ -130,9 +136,16 @@ public class TelaPermissoesView extends javax.swing.JFrame {
     public JTable getTblTabela() {
         return tblTabela;
     }
+
+    public JButton getBtnFechar() {
+        return btnFechar;
+    }
+    
+    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnFechar;
     private javax.swing.JButton btnPermissao;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblTabela;

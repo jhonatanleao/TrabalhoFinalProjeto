@@ -8,8 +8,11 @@ import dao.ImagemDao;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -40,7 +43,13 @@ public class TelaPrincipalPresenter {
         this.view.getBtnAbrir().addActionListener(new ActionListener(){
             @Override
             public void actionPerformed(ActionEvent e){
-                abrir(pessoa);
+                try {
+                    abrir(pessoa);
+                } catch (IOException ex) {
+                    Logger.getLogger(TelaPrincipalPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(TelaPrincipalPresenter.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -62,7 +71,7 @@ public class TelaPrincipalPresenter {
         view.setVisible(true);
     }
     
-    public void abrir(Pessoa pessoa){
+    public void abrir(Pessoa pessoa) throws IOException, InterruptedException{
         JFileChooser fileChooser = view.getFileChooser();
         File file = new File("src/imagens");
         fileChooser.setCurrentDirectory(file);

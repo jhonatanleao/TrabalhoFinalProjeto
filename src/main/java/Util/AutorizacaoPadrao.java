@@ -15,7 +15,7 @@ public class AutorizacaoPadrao implements Autorizacao{
     @Override
     public boolean autoriza(Set<String> autorizacoes, String caminhoImagem) {
         for(String autorizacao : autorizacoes){
-            if(autorizacao.equals(caminhoImagem) || autorizacao.equals("adm")){
+            if(autorizacao.equals(caminhoImagem) || autorizacao.equals("adm") || autorizacao.equals("tudo")){
                 return true;
             }
         }

@@ -4,6 +4,7 @@
  */
 package view;
 
+import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 
@@ -139,6 +140,14 @@ public class TelaSubPermissoesView extends javax.swing.JFrame {
 
     public JTextField getTxtNome() {
         return txtNome;
+    }
+
+    public JButton getBtnFechar() {
+        return btnFechar;
+    }
+
+    public JButton getBtnSalvar() {
+        return btnSalvar;
     }
 
     
